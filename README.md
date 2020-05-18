@@ -9,7 +9,7 @@ This project is a command line version of the dice game *Greed* using core Pytho
 ### Class 06 Greed Part 1  
 - Today is all about assessing the highest risk features and formulating a plan.  
 - The features we will focus on are <b>game logic</b> and the <b>tracking points</b>.  
-    - [ ] Define a GameLogic class to calculate score for a dice roll.  
+    - [x] Define a GameLogic class to calculate score for a dice roll.  
         - [ ] add `calculate_score` static method.  
         - [ ] The input to `calculate_score` is a tuple of integers that represents a dice roll.  
         - [ ] The output from `calculate_score` is an integer representing the roll's score according to <b>rules of game</b>.  
@@ -17,12 +17,12 @@ This project is a command line version of the dice game *Greed* using core Pytho
             - This will require skill in determining how many tests are enough.  
             - If you tried to test every scenario the number of tests would be massive.  
     - Handling rolling dice  
-      - [ ] Add `roll_dice` instance method to GameLogic class.  
-      - [ ] The input to `roll_dice` is an integer between 1 and 6.  
-      - [ ] The output of `roll_dice` is a tuple with random values between 1 and 6.  
-      - [ ] The length of tuple must match the argument given to `roll_dice` method.  
+      - [x] Add `roll_dice` static method to GameLogic class.  
+      - [x] The input to `roll_dice` is an integer between 1 and 6.  
+      - [x] The output of `roll_dice` is a tuple with random values between 1 and 6.  
+      - [x] The length of tuple must match the argument given to `roll_dice` method.  
     - Handle banking points  
-      - [ ] Define a Banker class  
+      - [x] Define a Banker class  
       - [ ] Add a `shelf` instance method  
         - [ ] Input to `shelf` is the amount of points(integer) to add to shelf.  
         - [ ] `shelf` should temporarily store <b>unbanked</b> points.  
