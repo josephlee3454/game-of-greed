@@ -5,7 +5,7 @@ from collections import Counter
 class GameLogic:
     @staticmethod
     def roll_dice(value):
-        """This is a docstring! its takes a value"""
+        """RolL_Dice has one required parameter: value. Value is an integer for the number of dice to be rolled."""
         output = tuple()
 
         for i in range(value):
@@ -15,7 +15,7 @@ class GameLogic:
 
     @staticmethod
     def calculate_score(set_dice):  # example input = (1, 2, 3, 4, 5, 6)
-        """Calculate scre"""
+        """Takes in tuple, evaluates game rules to calculate score"""
         score = 0
         current = Counter(
             set_dice
@@ -23,6 +23,9 @@ class GameLogic:
         common = Counter(set_dice).most_common(
             1
         )  # [(1, 1)] first most common in the set
+
+        if len(current) == 0:
+            return score
 
         if common[0][1] == 1 and len(current) == 6:
             score += 1500
@@ -106,24 +109,23 @@ class GameLogic:
                     score += 2400
                 else:
                     pass
-
         return score
-        # input is tuple of integers
-        # output is integer representing roll score
 
 
 class Banker:
-    def shelf(self):
-        # shelf = 0
-        pass
-        # input is how much to add to shelf
+    def __init__(self, balance=0, shelved=0):
+        self.balance = balance
+        self.shelved = shelved
 
-    def bank(self):
-        # bank = 0
-        pass
-        # input add shelf count to bank
-        # output ammount of points added to total from shelf
+    def shelf(self, value):
+        """Shelves the current score temporarily"""
+        self.shelved += value
 
     def clear_shelf(self):
-        pass
-        # remove all -UNBANKED- points
+        """Resets shelf value to zero"""
+        self.shelved = 0
+
+    def bank(self):
+        """Adds shelf value to balance"""
+        self.balance += self.shelved
+        return self.shelved

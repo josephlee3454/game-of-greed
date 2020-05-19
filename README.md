@@ -23,43 +23,43 @@ This project is a command line version of the dice game *Greed* using core Pytho
       - [x] The length of tuple must match the argument given to `roll_dice` method.  
     - Handle banking points  
       - [x] Define a Banker class  
-      - [ ] Add a `shelf` instance method  
-        - [ ] Input to `shelf` is the amount of points(integer) to add to shelf.  
-        - [ ] `shelf` should temporarily store <b>unbanked</b> points.  
-      - [ ] Add a `bank` instance method  
-        - [ ] `bank` should add any points on the <b>shelf</b> to total and reset shelf to 0  
-        - [ ] `bank` output should be the amount of points added to total from shelf  
-      - [ ] Add a `clear_shelf` instance method  
-        - [ ] `clear_shelf` should remove all unbanked points.
+      - [x] Add a `shelf` instance method  
+        - [x] Input to `shelf` is the amount of points(integer) to add to shelf.  
+        - [x] `shelf` should temporarily store <b>unbanked</b> points.  
+      - [x] Add a `bank` instance method  
+        - [x] `bank` should add any points on the <b>shelf</b> to total and reset shelf to 0  
+        - [x] `bank` output should be the amount of points added to total from shelf  
+      - [x] Add a `clear_shelf` instance method  
+        - [x] `clear_shelf` should remove all unbanked points.
 
 ## User Acceptance Tests  
 ### Testing - Roll Dice
-- [ ] When rolling 1 to 6 dice ensure:
-  - [ ] A sequence of correct length is returned  
-  - [ ] Each item in sequence is an integer with value between 1 and 6
+- [x] When rolling 1 to 6 dice ensure:
+  - [x] A sequence of correct length is returned  
+  - [x] Each item in sequence is an integer with value between 1 and 6
 
 ### Testing - Calculate Score  
-- [ ] `test_zilch` - non scoring roll should return 0  
-- [ ] `test_ones` - rolls with various number of 1s should return correct score  
-- [ ] `test_twos` - rolls with various number of 2s should return correct score  
-- [ ] `test_threes` - rolls with various number of 3s should return correct score  
-- [ ] `test_fours` - rolls with various number of 4s should return correct score  
-- [ ] `test_fives` - rolls with various number of 5s should return correct score  
-- [ ] `test_sixes` - rolls with various number of 6s should return correct score  
-- [ ] `test_straight` - 1,2,3,4,5,6 should return correct score  
-- [ ] `test_three_pairs` - 3 pairs should return correct score  
-- [ ] `test_two_trios` - 2 sets of 3 should return correct score  
-- [ ] `test_leftover_ones` - 1s not used in set of 3 (or greater) should return correct score  
-- [ ] `test_leftover_fives` - 5s not used in set of 3 (or greater) should return correct score  
+- [x] `test_zilch` - non scoring roll should return 0  
+- [x] `test_ones` - rolls with various number of 1s should return correct score  
+- [x] `test_twos` - rolls with various number of 2s should return correct score  
+- [x] `test_threes` - rolls with various number of 3s should return correct score  
+- [x] `test_fours` - rolls with various number of 4s should return correct score  
+- [x] `test_fives` - rolls with various number of 5s should return correct score  
+- [x] `test_sixes` - rolls with various number of 6s should return correct score  
+- [x] `test_straight` - 1,2,3,4,5,6 should return correct score  
+- [x] `test_three_pairs` - 3 pairs should return correct score  
+- [x] `test_two_trios` - 2 sets of 3 should return correct score  
+- [x] `test_leftover_ones` - 1s not used in set of 3 (or greater) should return correct score  
+- [x] `test_leftover_fives` - 5s not used in set of 3 (or greater) should return correct score  
 
 ### Testing - Banker  
-- [ ] `bank` method  
-    - [ ] should properly add unbanked points to total and return the <b>deposited</b> amount.  
-- [ ] `shelf` method  
-  - [ ] should properly track unbanked points  
-- [ ] `clear_shelf` method  
-  - [ ] should remove any unbanked points, resetting to 0  
-  - [ ] should not affect previously <b>banked</b> points.  
+- [x] `bank` method 
+    - [x] should properly add *shelved* points to total and return the <b>deposited</b> amount.  
+- [x] `shelf` method  
+  - [x] should properly track *shelved* points  
+- [x] `clear_shelf` method  
+  - [x] should remove any *shelved* points, resetting to 0  
+  - [x] should not affect previously <b>banked</b> points.  
 
 ## Dependencies  
 - poetry  
@@ -85,5 +85,9 @@ This project is under the MIT License.
 
 ## Version History  
 - 1.0.0 20200518 0900
-    - Initial file structure built.  
+  - Initial file structure built. 
+- 1.0.1 20200518 1230  
+  - Created a production branch for lab06 work day.  
+  - All work done in VScode LiveShare under Griffin's Computer.  
+  - Added key features of todays labs
 
