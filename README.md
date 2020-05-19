@@ -10,9 +10,9 @@ This project is a command line version of the dice game *Greed* using core Pytho
 - Today is all about assessing the highest risk features and formulating a plan.  
 - The features we will focus on are <b>game logic</b> and the <b>tracking points</b>.  
     - [x] Define a GameLogic class to calculate score for a dice roll.  
-        - [ ] add `calculate_score` static method.  
-        - [ ] The input to `calculate_score` is a tuple of integers that represents a dice roll.  
-        - [ ] The output from `calculate_score` is an integer representing the roll's score according to <b>rules of game</b>.  
+        - [x] add `calculate_score` static method.  
+        - [x] The input to `calculate_score` is a tuple of integers that represents a dice roll.  
+        - [x] The output from `calculate_score` is an integer representing the roll's score according to <b>rules of game</b>.  
         - There are a lot of rules, write tests for different "kinds" of roles  
             - This will require skill in determining how many tests are enough.  
             - If you tried to test every scenario the number of tests would be massive.  

@@ -1,7 +1,8 @@
-from game_of_greed.greed import GameLogic
+import pytest
+from game_of_greed.greed import GameLogic, Banker
 
-# Tests for GameLogic:
-## Tests for Roll dice
+# Tests for class GameLogic:
+# Tests for Roll dice
 def test_roll_dice():
     game = GameLogic()
     actual = len(game.roll_dice(6))
@@ -111,3 +112,26 @@ def test_three_pairs():
     actual = GameLogic.calculate_score((2, 2, 4, 4, 3, 3,))
     expected = 1500
     assert actual == expected
+
+
+# Tests for class Banker
+
+
+# def test_new_banker():
+#     banker = Banker()
+#     assert banker.balance == 0
+#     assert banker.shelved == 0
+
+
+# def test_shelf():
+#     banker = Banker()
+#     banker.shelf(100)
+#     assert banker.shelved == 100
+#     assert banker.balance == 0
+
+# def test_deposit():
+#     banker = Banker()
+#     banker.shelf(100)
+#     banker.bank()
+#     assert banker.shelved == 0
+#     assert banker.balance == 100

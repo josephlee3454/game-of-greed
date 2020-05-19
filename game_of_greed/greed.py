@@ -5,6 +5,7 @@ from collections import Counter
 class GameLogic:
     @staticmethod
     def roll_dice(value):
+        """This is a docstring! its takes a value"""
         output = tuple()
 
         for i in range(value):
@@ -14,6 +15,7 @@ class GameLogic:
 
     @staticmethod
     def calculate_score(set_dice):  # example input = (1, 2, 3, 4, 5, 6)
+        """Calculate scre"""
         score = 0
         current = Counter(
             set_dice
