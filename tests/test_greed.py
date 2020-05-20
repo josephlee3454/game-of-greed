@@ -187,7 +187,6 @@ def test_deposit():
         ((2, 2, 3, 3, 6, 6), 1500),
     ],
 )
-
 def test_all(test_input, expected):
     actual = GameLogic.calculate_score(test_input)
     assert actual == expected

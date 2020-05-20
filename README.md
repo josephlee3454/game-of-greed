@@ -32,7 +32,22 @@ This project is a command line version of the dice game *Greed* using core Pytho
       - [x] Add a `clear_shelf` instance method  
         - [x] `clear_shelf` should remove all unbanked points.
 
+### Class 07 Greed Part 2  
+- Extend Game of Greed to get the game in a playable state.  
+- [x] Application should implement all features from previous version  
+- [x] Application should simulate rolling between 1 and 6 dice  
+- [x] Application should allow user to set aside dice each roll  
+- [x] Application should allow "banking" current score or rolling again  
+- [x] Application should keep track of total score  
+- [x] Application should keep track of current round  
+- [x] Application should have automated tests to ensure proper operation  
+
 ## User Acceptance Tests  
+- [x] Convert required features into suite of passing unit tests  
+  - Example Given: `test_roll`:  
+    - doing a roll with x number of dice should return a sequence of x length random integers between 1 and 6 inclusive.  
+- [x] Use an automated tool to ensure correct behavior from end user's perspective.  
+
 ### Testing - Roll Dice
 - [x] When rolling 1 to 6 dice ensure:
   - [x] A sequence of correct length is returned  
@@ -90,4 +105,9 @@ This project is under the MIT License.
   - Created a production branch for lab06 work day.  
   - All work done in VScode LiveShare under Griffin's Computer.  
   - Added key features of todays labs
+- 1.0.2 20200519 1330  
+  - Created lab07 branch for working on next set of features.  
+  - Collaborated on VSCode via LiveShare.  
+  - Created Game Class 
+  - Created methods for game class to make game playable.  
 

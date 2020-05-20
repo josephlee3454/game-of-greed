@@ -14,15 +14,11 @@ class GameLogic:
         return output
 
     @staticmethod
-    def calculate_score(set_dice):  # example input = (1, 2, 3, 4, 5, 6)
+    def calculate_score(set_dice):  
         """Takes in tuple, evaluates game rules to calculate score"""
         score = 0
-        current = Counter(
-            set_dice
-        )  # { 1:1 2:1 3:1 4:1 5:1 6:1 } { key : value } current[5] = 1
-        common = Counter(set_dice).most_common(
-            1
-        )  # [(1, 1)] first most common in the set
+        current = Counter(set_dice) 
+        common = Counter(set_dice).most_common(1)  
 
         if len(current) == 0:
             return score
@@ -129,3 +125,101 @@ class Banker:
         """Adds shelf value to balance"""
         self.balance += self.shelved
         return self.shelved
+
+
+class Game:
+    def __init__(self, roller=None):
+        self.roller = roller
+        self.rounds = 1
+        self.dice_count = 6
+        self.bank = Banker()
+
+    def intro(self):
+        """prints game introduction to user in command line"""
+        print("Welcome to Game of Greed")
+        response = input("Wanna play?")
+
+        if response == "y":
+            self.start_round(self.rounds, self.dice_count)
+        else:
+            print("OK. Maybe another time")
+
+    def start_round(self, rounds, rolls):
+        """initiates round of dice roll"""
+        print(f"Starting round {rounds}")
+        print(f"Rolling {rolls} dice...")
+
+        if self.roller:
+            dice_set = self.roller(rolls)
+            print(self.dice_format(dice_set))
+        else:
+            dice_set = GameLogic.roll_dice(rolls)
+            print(self.dice_format(dice_set))
+
+        response = input("Enter dice to keep (no spaces), or (q)uit: ")
+        if response == "q":
+            print(f"Total score is {self.bank.balance} points")
+            print(f"Thanks for playing. You earned {self.bank.balance} points")
+        else:
+            self.parse_input(response, rolls, dice_set)
+
+    def dice_format(self, roll):
+        """removes parenthesis and commas from string adds a comma between values"""
+        return ",".join([str(i) for i in roll])
+
+    def parse_input(self, response, rolls, dice_set):
+        """converts user input to a tuple"""
+        keepers = tuple([int(i) for i in response])
+        if self.cheater_fix(dice_set, keepers):
+            current_score = GameLogic.calculate_score(keepers)
+            self.bank.shelf(current_score)
+            remainder = rolls - len(keepers)
+
+            print(
+                f"You have {self.bank.shelved} unbanked points and {remainder} dice remaining"
+            )
+            response2 = input("(r)oll again, (b)ank your points or (q)uit ")
+            if response2 == "q":
+                print(f"Total score is {self.bank.balance} points")
+                print(f"Thanks for playing. You earned {self.bank.balance} points")
+            elif response2 == "r":
+                self.rounds += 1
+                self.dice_count -= len(keepers)
+                self.start_round(self.rounds, self.dice_count)
+            elif response2 == "b":
+                banked_points = self.bank.bank()
+                print(f"You banked {banked_points} points in round {self.rounds}")
+                print(f"Total score is {self.bank.balance} points")
+                self.bank.clear_shelf()
+                self.rounds += 1
+                self.dice_count = 6
+                self.start_round(self.rounds, self.dice_count)
+        else:
+            print("Cheater!!! Or possibly made a typo...")
+            print(self.dice_format(dice_set))
+            new_response = input("Enter dice to keep (no spaces), or (q)uit: ")
+            if response == "q":
+                print(f"Total score is {self.bank.balance} points")
+                print(f"Thanks for playing. You earned {self.bank.balance} points")
+            else:
+                self.parse_input(new_response, rolls, dice_set)
+
+    def cheater_fix(self, dice_seq, userInput):  # dice_seq= (1, 2, 5, 5, 3, 4) userInput = (5, 5, 5) /or/ (6,7)
+        """Testing user input against dice sequence"""
+        dice_list = list(dice_seq)
+        status = True
+        for die in userInput:
+            try:
+                dice_list.pop(dice_list.index(die))
+            except ValueError:
+                status = False
+        return status
+
+    def play(self):
+        """starts game"""
+        self.intro()
+
+
+if __name__ == "__main__":
+    game = Game()
+    game.play()
