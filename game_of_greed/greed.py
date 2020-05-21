@@ -154,6 +154,24 @@ class GameLogic:
 
         return score, hot_dice_list
 
+    @staticmethod
+    def get_scorers(dice):
+        """Imported from client code, to make client provided bot work. // Regular game does not utilizet his code"""
+        all_dice_score, _ = GameLogic.calculate_score(dice, [])
+
+        if all_dice_score == 0:
+            return tuple()
+
+        scorers = []
+
+        for i in range(len(dice)):
+            sub_roll = dice[:i] + dice[i + 1 :]
+            sub_score, _ = GameLogic.calculate_score(sub_roll, [])
+
+            if sub_score != all_dice_score:
+                scorers.append(dice[i])
+
+        return tuple(scorers)
 
 class Banker:
     def __init__(self, balance=0, shelved=0):
@@ -175,12 +193,13 @@ class Banker:
 
 
 class Game:
-    def __init__(self, roller=None):
+    def __init__(self, roller=None, num_rounds=16):
         self.roller = roller or GameLogic.roll_dice
         self.rounds = 1
         self.dice_count = 6
         self.dice_set = tuple()
         self.bank = Banker()
+        self.num_rounds = num_rounds
 
     def intro(self):
         """prints game introduction to user in command line"""
@@ -194,22 +213,23 @@ class Game:
 
     def start_round(self, rounds):
         """initiates round of dice roll"""
+        while self.rounds <= self.num_rounds:
+            if self.dice_count == 6 and self.bank.shelved == 0:
+                print(f"Starting round {self.rounds}")
+            print(f"Rolling {self.dice_count} dice...")
+            self.dice_set = self.roller(self.dice_count)  # dice set is created here
+            print(self.dice_format(self.dice_set))
 
-        if self.dice_count == 6 and self.bank.shelved == 0:
-            print(f"Starting round {self.rounds}")
-        print(f"Rolling {self.dice_count} dice...")
-        self.dice_set = self.roller(self.dice_count)  # dice set is created here
-        print(self.dice_format(self.dice_set))
-
-        score, _ = GameLogic.calculate_score(self.dice_set, list(self.dice_set))
-        if score == 0:
-            self.zilch()
-        else:
-            response = input("Enter dice to keep (no spaces), or (q)uit: ")
-            if response == "q":
-                self.quit_game()
+            score, _ = GameLogic.calculate_score(self.dice_set, list(self.dice_set))
+            if score == 0:
+                self.zilch()
             else:
-                self.parse_input(response)
+                response = input("Enter dice to keep (no spaces), or (q)uit: ")
+                if response == "q":
+                    self.quit_game()
+                else:
+                    self.parse_input(response)
+        self.quit_game()
 
     def dice_format(self, roll):
         """removes parenthesis and commas from string adds a comma between values"""
