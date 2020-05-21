@@ -173,6 +173,7 @@ class GameLogic:
 
         return tuple(scorers)
 
+
 class Banker:
     def __init__(self, balance=0, shelved=0):
         self.balance = balance
@@ -193,7 +194,7 @@ class Banker:
 
 
 class Game:
-    def __init__(self, roller=None, num_rounds=16):
+    def __init__(self, roller=None, num_rounds=20):
         self.roller = roller or GameLogic.roll_dice
         self.rounds = 1
         self.dice_count = 6
@@ -207,28 +208,31 @@ class Game:
         response = input("Wanna play?")
 
         if response == "y":
-            self.start_round(self.rounds)
+            self.start_round()
         else:
             print("OK. Maybe another time")
 
-    def start_round(self, rounds):
+    def start_round(self):
         """initiates round of dice roll"""
         while self.rounds <= self.num_rounds:
             if self.dice_count == 6 and self.bank.shelved == 0:
                 print(f"Starting round {self.rounds}")
-            print(f"Rolling {self.dice_count} dice...")
-            self.dice_set = self.roller(self.dice_count)  # dice set is created here
-            print(self.dice_format(self.dice_set))
 
+            print(f"Rolling {self.dice_count} dice...")
+            self.dice_set = self.roller(self.dice_count)
+            print(self.dice_format(self.dice_set))
             score, _ = GameLogic.calculate_score(self.dice_set, list(self.dice_set))
+
             if score == 0:
                 self.zilch()
+                break
             else:
                 response = input("Enter dice to keep (no spaces), or (q)uit: ")
                 if response == "q":
-                    self.quit_game()
+                    break
                 else:
                     self.parse_input(response)
+                    break
         self.quit_game()
 
     def dice_format(self, roll):
@@ -253,10 +257,10 @@ class Game:
                 )
                 response2 = input("(r)oll again, (b)ank your points or (q)uit ")
                 if response2 == "q":
-                    self.quit_game()
+                    pass
                 elif response2 == "r":
                     self.dice_count -= len(keepers)
-                    self.start_round(self.rounds)
+                    self.start_round()
                 elif response2 == "b":
                     self.bank_round()
 
@@ -270,7 +274,7 @@ class Game:
             self.quit_game()
         elif response2 == "r":
             self.dice_count = 6
-            self.start_round(self.rounds)
+            self.start_round()
         elif response2 == "b":
             self.bank_round()
 
@@ -287,7 +291,7 @@ class Game:
         self.bank.clear_shelf()
         self.rounds += 1
         self.dice_count = 6
-        self.start_round(self.rounds)
+        self.start_round()
 
     def zilch(self):
         """Zilch! Ends the round, user turn, and starts the next round when a roll results in a score of 0"""
@@ -297,7 +301,7 @@ class Game:
         self.bank.clear_shelf()
         self.rounds += 1
         self.dice_count = 6
-        self.start_round(self.rounds)
+        self.start_round()
 
     def cheater_fix(self, dice_seq, userInput):
         """Testing user input against dice sequence"""

@@ -47,6 +47,12 @@ This project is a command line version of the dice game *Greed* using core Pytho
 - [x] Handle zilch  
   - No points for the round, and the round is over.  
 
+### Class 09 Greed Part 4 
+- Extend Game of Greed to allow AI Bot to play 
+  - [x] Create an AI Bot to play Game of Greed 
+  - [x] Bot Class should be added to `player_bot.py` file.  
+  - [x] User should be able to see your bot play by executing `player_bot.py` from terminal. 
+
 ## User Acceptance Tests  
 - [x] Convert required features into suite of passing unit tests  
   - Example Given: `test_roll`:  
@@ -122,3 +128,9 @@ This project is under the MIT License.
   - Created hot_dice function  
   - Created Zilch function  
   - All features, unit tests, and automated tests are working.  
+- 1.0.4 20200521 1300  
+  - Created lab09 branch for working on next set of featuers.  
+  - Collaborated on VSCode via LiveShare.  
+  - Created player_bot.py  
+  - Created a RiskyBob Bot.  
+  - No new unit tests implemented.  

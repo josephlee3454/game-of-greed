@@ -78,21 +78,40 @@ class NervousNellie(BasePlayer):
             raise ValueError(f"Unrecognized prompt {prompt}")
 
 
-# class RiskyBob(BasePlayer):
-#     def __init__(self):
-#         super().__init__()
-#         self.roll = None
-    
-#     def _mock_print_(self, *args, **kwargs):
-#         first_arg = args[0]
-#         first_char = first_arg[0]
-#         if first_char.isdigit():
-#             self.roll = tuple(int(char) for char in first_arg.split(","))
-#         elif first_arg.startswith("Thanks for playing."):
-#             self.total_score = int(re.findall(r"\d+", first_arg)[0])
+class RiskyBob(BasePlayer):
+    def __init__(self):
+        super().__init__()
+        self.roll = None
 
+    def _mock_print(self, *args, **kwargs):
+        first_arg = args[0]
+        first_char = first_arg[0]
+        if first_char.isdigit():
+            self.roll = tuple(int(char) for char in first_arg.split(","))
+        elif first_arg.startswith("Thanks for playing."):
+            self.total_score = int(re.findall(r"\d+", first_arg)[0])
+
+    def _mock_input(self, *args, **kwargs):
+        prompt = args[0]
+        if prompt.startswith("Wanna play?"):
+            return "y"
+        elif prompt.startswith("Enter dice to keep (no spaces), or (q)uit:"):
+            scorers = GameLogic.get_scorers(self.roll)
+            keepers = "".join([str(ch) for ch in scorers])
+            return keepers
+        elif prompt.startswith("(r)oll again, (b)ank your points or (q)uit "):
+            scorers = GameLogic.get_scorers(self.roll)
+            if len(self.roll) - len(scorers) >= 4:
+                return "r"
+            else:
+                return "b"
+        else:
+            raise ValueError(f"Unrecognized prompt {prompt}")
 
 
 if __name__ == "__main__":
     # Naysayer.play(1)
+    print("NervousNellie  is playing....")
     NervousNellie.play(100)
+    print("RiskyBob is playing....")
+    RiskyBob.play(100)
