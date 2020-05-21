@@ -1,7 +1,5 @@
 # Lab: Class 06 - Class 09 Greed Game
 
-## Open Git Pull Requests  
-
 ## Overview  
 This project is a command line version of the dice game *Greed* using core Python tools and understanding of the basics of the language. The game is also known as Ten Thousand, Zilch, or Foo.  
 
@@ -41,6 +39,13 @@ This project is a command line version of the dice game *Greed* using core Pytho
 - [x] Application should keep track of total score  
 - [x] Application should keep track of current round  
 - [x] Application should have automated tests to ensure proper operation  
+
+### Class 08 Greed Part 3  
+- Extend Game of Greed to get the game in a playable state. 
+- [x] Should handle when cheating occurs.  
+- [x] Should allow user to continue rolling with 6 new dice when all dice have scored in current turn.  
+- [x] Handle zilch  
+  - No points for the round, and the round is over.  
 
 ## User Acceptance Tests  
 - [x] Convert required features into suite of passing unit tests  
@@ -110,4 +115,10 @@ This project is under the MIT License.
   - Collaborated on VSCode via LiveShare.  
   - Created Game Class 
   - Created methods for game class to make game playable.  
-
+- 1.0.3 20200520 1230  
+  - Created lab08 branch for working on next set of features.  
+  - Collaborated on VSCode via LiveShare.  
+  - Created cheat_fix function  
+  - Created hot_dice function  
+  - Created Zilch function  
+  - All features, unit tests, and automated tests are working.  
